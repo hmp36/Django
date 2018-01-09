@@ -1,0 +1,269 @@
+In [1]: from apps.dojo_ninja_app.models import Dojo, Ninja
+
+In [2]: Dojo.objects.create(name= "CodingDojo Silicon Valley", city= "Mountain View",state= "CA")
+Out[2]: <Dojo: Dojo object>
+
+In [3]: Dojo.objects.create(name= "CodingDojo Seattle", city= "Seattle",state= "WA")
+Out[3]: <Dojo: Dojo object>
+
+In [4]: Dojo.objects.create(name= "CodingDojo New York", city="New York",state= "NY")
+Out[4]: <Dojo: Dojo object>
+
+In [5]: Ninja.objects.create(first_name= "Sam", last_name= "meng", dojo id=1)
+  File "<ipython-input-5-b46f005e29b0>", line 1
+    Ninja.objects.create(first_name= "Sam", last_name= "meng", dojo id=1)
+                                                                     ^
+SyntaxError: invalid syntax
+
+
+In [6]: Ninja.objects.create(first_name="Sam", last_name="Meng", dojo_id=1)
+Out[6]: <Ninja: Ninja object>
+
+In [7]: Ninja.objects.create(first_name="Hagan", last_name="Pratt", dojo_id=2)
+Out[7]: <Ninja: Ninja object>
+
+In [8]: Ninja.objects.create(first_name="John", last_name="Hopper", dojo_id=3)
+Out[8]: <Ninja: Ninja object>
+
+In [9]: Ninja.objects.create(first_name="Oscar", last_name="Wilde", dojo_id=3)
+Out[9]: <Ninja: Ninja object>
+
+In [10]: Ninja.objects.create(first_name="Bill", last_name="Bob", dojo_id=3)
+Out[10]: <Ninja: Ninja object>
+
+In [11]: Ninja.objects.create(first_name="Cynthia", last_name="Samson", dojo_id=1)
+Out[11]: <Ninja: Ninja object>
+
+In [12]: Ninja.objects.create(first_name="Olivia", last_name="Sognockavic", dojo_id=2)
+Out[12]: <Ninja: Ninja object>
+
+In [13]: Ninja.objects.first(1).dojo
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-13-96be18c77a7c> in <module>()
+----> 1 Ninja.objects.first(1).dojo
+
+C:\Users\SEC\desktop\Coding_Dojo\dojo_assignments\Python\myEnvironments\djangoEnv\lib\site-packages\django\db\models\manager.pyc in manager_method(self, *args, **kwargs)
+     83         def create_method(name, method):
+     84             def manager_method(self, *args, **kwargs):
+---> 85                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     86             manager_method.__name__ = method.__name__
+     87             manager_method.__doc__ = method.__doc__
+
+TypeError: first() takes exactly 1 argument (2 given)
+
+In [14]: Ninja.objects.first().ninjas.all.()
+  File "<ipython-input-14-0a8e9f9a2c76>", line 1
+    Ninja.objects.first().ninjas.all.()
+                                     ^
+SyntaxError: invalid syntax
+
+
+In [15]: x=Dojo.objects.first()
+
+In [16]: print first.name
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-16-e91137696db9> in <module>()
+----> 1 print first.name
+
+NameError: name 'first' is not defined
+
+In [17]: print first_name
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-17-7732394fc3c0> in <module>()
+----> 1 print first_name
+
+NameError: name 'first_name' is not defined
+
+In [18]: x=Dojo.objects.first()
+
+In [19]: x.name
+Out[19]: u'CodingDojo Silicon Valley'
+
+In [20]: x.city
+Out[20]: u'Mountain View'
+
+In [21]: x.state
+Out[21]: u'CA'
+
+In [22]: x=Dojo.objects.second()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-22-dc49c893c39e> in <module>()
+----> 1 x=Dojo.objects.second()
+
+AttributeError: 'Manager' object has no attribute 'second'
+
+In [23]: x=Dojo.objects.last()
+
+In [24]: x.state
+Out[24]: u'NY'
+
+In [25]: x.city
+Out[25]: u'New York'
+
+In [26]: x.name
+Out[26]: u'CodingDojo New York'
+
+In [27]: x.name
+Out[27]: u'CodingDojo New York'
+
+In [28]: x=Dojo.objects.all()
+
+In [29]: x.name
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-29-7a8bb287c399> in <module>()
+----> 1 x.name
+
+AttributeError: 'QuerySet' object has no attribute 'name'
+
+In [30]: Dojo.objects.create(name= "Coding Dojo Texas", city= "Austin",state= "TX")
+Out[30]: <Dojo: Dojo object>
+
+In [31]: Dojo.objects.create(name= "Coding Dojo Colorado", city= "Colorado Springs",state= "CO")
+Out[31]: <Dojo: Dojo object>
+
+In [32]: Dojo.objects.create(name= "Coding Dojo London", city= "London",state= "N/A")
+Out[32]: <Dojo: Dojo object>
+
+In [33]: Dojo.object.get(id=4).delete()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-33-ba27ce0c9dc5> in <module>()
+----> 1 Dojo.object.get(id=4).delete()
+
+AttributeError: type object 'Dojo' has no attribute 'object'
+
+In [34]: Dojo.objects.get(id=4).delete()
+Out[34]: (1, {u'dojo_ninja_app.Dojo': 1, u'dojo_ninja_app.Ninja': 0})
+
+In [35]: Dojo.objects.get(id=5).delete()
+Out[35]: (1, {u'dojo_ninja_app.Dojo': 1, u'dojo_ninja_app.Ninja': 0})
+
+In [36]: Dojo.objects.get(id=6).delete()
+Out[36]: (1, {u'dojo_ninja_app.Dojo': 1, u'dojo_ninja_app.Ninja': 0})
+
+In [37]: Ninja.objects.create(first_name="Forrest", last_name="Gump", dojo_id=1)
+Out[37]: <Ninja: Ninja object>
+
+In [38]: Ninja.objects.create(first_name="Queen", last_name="Elizabeth III", dojo_id=2)
+Out[38]: <Ninja: Ninja object>
+
+In [39]: for ninjas in dojo_ninja_app
+  File "<ipython-input-39-d8c8375eaf13>", line 1
+    for ninjas in dojo_ninja_app
+                                ^
+SyntaxError: invalid syntax
+
+
+In [40]: for ninjas in Ninja.objects.first().dojo
+    ...: :    print ninja.first_name
+  File "<ipython-input-40-6572153c9eff>", line 1
+    for ninjas in Ninja.objects.first().dojo
+                                            ^
+SyntaxError: invalid syntax
+
+
+In [41]: for ninjas in Ninja.objects.filter(dojo=3):
+    ...: :    print ninjas.name
+  File "<ipython-input-41-40d569fda19d>", line 2
+    :    print ninjas.name
+    ^
+IndentationError: expected an indented block
+
+
+In [42]: for ninjas in Ninja.objects.filter(dojo=3):
+    ...: :    print ninjas.first_name
+  File "<ipython-input-42-d3b80cac41b6>", line 2
+    :    print ninjas.first_name
+    ^
+IndentationError: expected an indented block
+
+
+In [43]: for ninjas in Ninja.objects.filter(dojo=3):
+    ...: :    print ninjas.first_name+" " ninjas. last_name
+  File "<ipython-input-43-c472ded7a724>", line 2
+    :    print ninjas.first_name+" " ninjas. last_name
+    ^
+IndentationError: expected an indented block
+
+
+In [44]: for ninjas in Ninja.objects.filter(dojo=3):
+    ...: :    print ninjas.first_name+" " +ninjas.last_name
+  File "<ipython-input-44-a8c90860a3bd>", line 2
+    :    print ninjas.first_name+" " +ninjas.last_name
+    ^
+IndentationError: expected an indented block
+
+
+In [45]: for ninjas in Ninja.objects.filter(dojo=3)
+    ...:     print ninjas.first_name+" " +ninjas.last_name
+  File "<ipython-input-45-00430e035650>", line 1
+    for ninjas in Ninja.objects.filter(dojo=3)
+                                              ^
+SyntaxError: invalid syntax
+
+
+In [46]: for ninjas in Ninja.objects.filter(dojo=3):
+    ...:     print ninjas.first_name+" " +ninjas.last_name
+    ...:
+John Hopper
+Oscar Wilde
+Bill Bob
+
+In [47]: for ninjas in Ninja.objects.filter(dojo=1):
+    ...:     print ninjas.first_name+" " +ninjas.last_name
+    ...:
+Sam Meng
+Cynthia Samson
+Forrest Gump
+
+In [48]: for ninjas in Ninja.objects.filter(dojo=2):
+    ...:     print ninjas.first_name+" " +ninjas.last_name
+    ...:
+    ...:
+Hagan Pratt
+Olivia Sognockavic
+Queen Elizabeth III
+
+In [49]:
+
+
+
+
+
+In [1]: from apps.dojo_ninja_app.models import *
+
+In [2]: Dojo.objects.first()
+Out[2]: <Dojo: Dojo object>
+
+In [3]: Dojo.objects.first()
+Out[3]: <Dojo: Dojo object>
+
+In [4]: x = Dojo.objects.first()
+
+In [5]: print desc
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-5-caca142cfadb> in <module>()
+----> 1 print desc
+
+NameError: name 'desc' is not defined
+
+In [6]: print x.desc
+2017-12-20 00:02:52.758000+00:00
+
+In [7]:
+
+
+
+
+
+
+
+
+
+
