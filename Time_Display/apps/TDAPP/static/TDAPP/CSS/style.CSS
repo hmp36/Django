@@ -1,0 +1,53 @@
+*{
+   padding:0px;
+   margin:0px; 
+   font-family: verdana;
+  /* outline:1px solid black; */
+}
+
+
+.line{
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    background: rgb(120, 179, 197); 
+    border: 1px solid black;
+    padding: 20px;
+    border-radius:15px; 
+
+}
+
+#time{
+    margin-top: 100px;
+  } 
+
+body{
+background: rgb(43, 226, 104);     
+background-image: url("http://jp.rohto.com/~/Media/com/cp/ninja/en/dco_eye_ninja.png");
+background-position: right;
+background-repeat: no-repeat;
+width: 800px;
+margin:20px auto;
+}
+
+
+/* * .location{
+    border: 1px solid black;
+    display: inline-block;
+    text-align: center;
+    background:gold; 
+    border-radius: 15px;
+    padding:5px;
+}
+#activities{
+    border: 1px solid black;
+    height: 200px;
+    width:  500px;
+    overflow:scroll;
+    background:turquoise;
+    border-radius: 8px;
+}
+.button{
+    border-radius: 8px;
+    color:red;
+/* } */ 
