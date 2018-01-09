@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pets App</title>
+</head>
+<body>
+
+<h1>Pets</h1>
+
+<p>Pets</p>
+{% for pet in pets %}
+	<p>{{pet.name}} {{pet.species}} {{pet.breed}} {{pet.owner.name}}</p>
+{% endfor %}
+
+<p>Owners</p>
+{% for owner in owners %}
+	<p>{{owner.name}}</p>
+		{% for pet in owner.pets.all %}
+			<p>{{ pet.name }}</p>
+		{% endfor %}
+	<hr>
+{% endfor %}
+
+
+</body>
+</html>
