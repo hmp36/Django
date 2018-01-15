@@ -1,0 +1,26 @@
+div {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    width: 500px;
+    margin: 20px auto;
+}
+
+#success {
+    background-color: lightgreen;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    background-color: darkgreen;
+    border: 1px lightgreen solid;
+    border-radius: 3px;
+    box-shadow: dimgrey 2px 2px;
+    padding: 5px;
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+</head>
+<body>
+
+<form action="/update_book/{{book.id}}", method="post">
+	<input type="text" name="title" value="{{book['title']}}"><br>
+	<input type="text" name="author" value="{{book['author']}}"><br>
+	<input type="submit" value="Update book" a book">
+</form>
+
+</body>
+</html>

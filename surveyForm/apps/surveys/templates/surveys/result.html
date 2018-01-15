@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Survey form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'surveys/styles.css' %}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <p id="success">Thanks for submitting this form! You have submitted this form {{ count }} times now.</p>
+        <div id="display_results">
+            <p class="underlined">Submitted Information</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{ name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dojo Location:</td>
+                        <td>{{ location }}</td>
+                    </tr>
+                    <tr>
+                        <td>Favorite Language:</td>
+                        <td>{{ language }}</td>
+                    </tr>
+                    <tr>
+                        <td>Comment:</td>
+                        <td>{{ comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a href="/">Go back</a>
+        <a href="/surveys/reset">Reset counter</a>
+    </div>
+</body>
+
+</html>

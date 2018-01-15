@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+</head>
+<body>
+
+<table border=1>
+	<tr>
+		<th>Title</th>
+		<th>Author</th>
+		<th>Created at</th>
+		<th>Actions</th>
+	</tr>
+	{% for book in books %}
+		<tr>
+			<td>{{book["title"]}}</td>
+			<td>{{book["author"]}}</td>
+			<td>{{book["created_at"]}}</td>
+			<td>
+				<a href="/edit/{{book.id}}">Edit</a> | 
+				<a href="/delete/{{book.id}}">Delete</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+<form action="/create_book", method="post">
+	<input type="text" name="title"><br>
+	<input type="text" name="author"><br>
+	<input type="submit" value="Add a book">
+</form>
+
+</body>
+</html>

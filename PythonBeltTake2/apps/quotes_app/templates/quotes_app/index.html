@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login/Registration</title>
+</head>
+
+<body>
+    <h2 style="color: blue">Registration</h2>
+    <form action="/register" method="post">
+        {% csrf_token %} Name: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="text" name="name">
+        <br> Alias: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="text" name="alias">
+        <br> Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="text" name="email">
+        <br> Password:&nbsp
+        <input type="password" name="password">
+        <br> Confirm PW:&nbsp&nbsp&nbsp
+        <input type="password" name="password_confirmation">
+        <br> Date of Birth:&nbsp
+        <input type="date" name="birthdate">
+        <br>
+        <p style="padding-left: 180px">
+            <input type="submit" value="Register">
+        </p>
+    </form>
+
+    {% if messages %} {% for message in messages%} {% if 'registration' in message.tags %}
+    <p>{{message}}</p>
+    {% endif %} {%endfor%} {% endif %}
+    <h2 style="color: blue">Login</h2>
+
+    <form action="/login" method="post">
+        {% csrf_token %} Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="text" name="email">
+        <br> Password:&nbsp
+        <input type="password" name="password">
+        <br>
+        <p style="padding-left: 150px">
+            <input type="submit" value="Login">
+        </p>
+    </form>
+
+    {% if messages %} {% for message in messages%} {% if 'login' in message.tags %}
+    <p>{{message}}</p>
+    {% endif %} {%endfor%} {% endif %}
+</body>
+
+</html>

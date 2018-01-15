@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Reg | Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/styles.css'}">
+</head>
+
+<body>
+    <form action="/registration" method="POST">
+        {% csrf_token %}
+        <h1 style="color: Green">Registration</h1>
+        <p>
+            <label for="first_name">First Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="text" name="first_name">
+            </label>
+        </p>
+        <p>
+            <label for="last_name">Last Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                
+                <input type="text" name="last_name">
+            </label>
+        </p>
+        <p>
+            <label for="email">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="text" name="email">
+            </label>
+        </p>
+        <p>
+            <label for="password">Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 &nbsp&nbsp
+                <input type="password" name="password">
+            </label>
+        </p>
+        <p>
+            <label for="confirm_pw">Confirm Password:
+                <input type="password" name="confirm_pw">
+            </label>
+        </p>
+        <p>
+            <input type="submit" value="Register">
+        </p>
+    </form>
+
+<Br>
+<Br>
+
+
+    <form action="/login" method="POST">
+        {% csrf_token %}
+        <h2 style="color: rgb(4, 8, 253)">Login</h2>
+        <p>
+            <label for="email">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="text" name="email">
+            </label>
+        </p>
+        <p>
+            <label for="password">Password:
+                <input type="password" name="password">
+            </label>
+        </p>
+        <p>
+            <input type="submit" value="Login">
+        </p>
+    </form>
+    {% if messages %} {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} {% endif %}
+</body>
+
+</html>

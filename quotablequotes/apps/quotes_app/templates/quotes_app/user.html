@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User</title>
+</head>
+
+<body>
+    <a href="/quotes">Dashboard</a>
+    <a href="/logout">Logout</a>
+    <h1 style="color: green">Posts by {{user.name}} </h1>
+    <p style="color: green">
+        <strong>Count:{{user.favorites.all | length}}</strong>
+    </p>
+
+    {% for favorite in favorites %}
+    <div>
+        <span style="color: red">{{favorite.author}}:</span>
+        {{favorite.content}}
+    </div>
+    {% endfor %}
+</body>
+
+</html>
