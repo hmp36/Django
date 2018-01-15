@@ -1,0 +1,29 @@
+pip install Django- command used to install Django
+
+pip list- C:\Users\SEC>pip list
+DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
+Django (1.11.7)
+pip (9.0.1)
+pytz (2017.3)
+setuptools (28.8.0)
+
+pip install Django-C:\Users\SEC>pip install Django
+Requirement already satisfied: Django in c:\python27\lib\site-packages
+Requirement already satisfied: pytz in c:\python27\lib\site-packages (from Django) 
+
+pip freeze- Output installed packages in requirements format.
+
+packages are listed in a case-insensitive sorted order.
+
+pip freeze > requirements.txt
+
+1s- I learned that this is the mac equivalent of dir
+
+
+pip uninstall Django- uninstalls program
+
+pip show Django- doesn't return a response because Django has been uninstalled
+
+pip search Flask- an output with all packages containing the name "Flask" and
+a description with that. 
+ 
