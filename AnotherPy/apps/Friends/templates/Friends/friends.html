@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friends list</title>
+</head>
+
+<body>
+                <h1>Welcome, {{user.name}}!  </h1>
+    <a href="/">
+        <Button>Logout</Button>
+    </a>
+    <h3>These our your friends.</h3>
+    <table border= 3>
+        <tr>
+            <th>Name</th>
+            <th>Delete this friend</th>
+        </tr>
+        {% for friendship in friends %}
+        <tr>
+            <td>{{ friendship.friend.name }}</td>
+            <td>
+                <form action="/remove/{{friendship.friend.id}}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Goodbye!">
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+
+    <h3>You may know these people. </h3>
+
+    <table border=3>
+        <tr>
+            <th>Name</th>
+            <th>Make a new friend</th>
+        </tr>
+        {% for person in not_friends %}
+        <tr>
+            <td>
+                <a href="/show/{{person.id}}">{{person.name}}</a>
+            </td>
+            <td>
+                <form action="/add/{{person.id}}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Let's be friends">
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+
+</body>
+
+</html>

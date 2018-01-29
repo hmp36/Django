@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Info</title>
+</head>
+
+<body>
+    {% for user in your_users %}
+    <h1>{{user.name}}'s Blurb</h1>
+    <P><a href="/"></a><Button>Logout</Button>  </P>
+    <P><a href="/Friends/friends.html"></a><Button>Home</Button>
+    </P>
+    {% endfor %}
+    <p>You are still {{user.name}}</p>
+    {% for user in your_users %}
+    <ul>
+        <li>Name: {{ user.name }} {{user.username}}</li>
+        <li>Email: {{user.email}}</li>
+        <li>Username: {{user.username}}</li>
+        <li>Birthday: {{user.dob}} </li>
+        <li>Registered at: {{user.created_at}}</li>
+        <li>{{user.id}}</li>
+    </ul>
+    <br>
+    <br>
+    <form action="/add/{{user.id}}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Add Friend">
+    </form>
+    {% endfor %}
+
+
+</body>
+
+</html>

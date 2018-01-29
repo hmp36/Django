@@ -30,16 +30,7 @@ def friends(request):
     not_my_homies = User.objects.all().exclude(id=request.session['user_id'])
     for homie in my_homies:  # remove homies from not my homies
         not_my_homies = not_my_homies.exclude(id=homie.friend.id)
-    # for person in everybody:
-    #     my_homies.append(person)
-
-    # for homie in my_homies:
-    #     print homie
-    # print "MY HOMES ARE AS FOLLOWS: ", my_homies
-
-    # for each_user in other_users:
-    #     if each_user not in my_homies:
-    #         not_my_homies.append(each_user)
+    
 
     context = {
         "user": me,

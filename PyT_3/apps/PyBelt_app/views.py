@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from models import User
+from .models import *
 import bcrypt
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+
 
 
 def index(request):
@@ -12,29 +11,25 @@ def index(request):
 def create(request):
     return render(request, "PyBelt_app/create.html")
 
+def dashboard(request):
+    all_wishes = Wish.objects.all()
+    user = User.objects.get(id=request.session['user_id'])
+    user_wishes=user.items.all()
+    for wish in user_wishes:
+        all_wishes= all_wishes.exclude(id=wish.id) 
 
-
-def dashboard(request, name):
     context = {
-        'name': name
+        "wishes": all_wishes,
+        "my_wishes": user.items.all(),
+        "user":user
     }
-    return render(request, "Pybelt_app/dashboard.html", context)
+    return render(request, "PyBelt_app/dashboard.html", context)
 
-
-# def registration(request):
-#     result = User.manager.makeUser(request.POST)
-#     # result will be either (True, user) or (False, errors)
-#     if result[0]:
-#         return redirect('/dashboard/{}'.format(result[1].name))
-#     for message in result[1].itervalues():
-#         messages.error(request, message)
-#     return redirect('/')
-
-def registration(request):
+def register(request):
         result = User.manager.validateUser(request.POST)
     	check = User.objects.validateUser(request.POST)
 	if request.method != 'POST':
-		return redirect("Pybelt_app/dashboard.html")
+		return redirect("/")
 	if check[0] == False:
 		for error in check[1]:
 			messages.add_message(request, messages.INFO, error,
@@ -56,8 +51,8 @@ def registration(request):
 
 		#add user to session, logging them in
 		request.session['user_id'] = user.id
-		#route to quotes page
-		return redirect("Pybelt_app/dashboard.html")
+		#route to wishes page
+		return redirect("/dashboard")
 
 
 # ('/dashboard/{}'.format(result[1].name))
@@ -65,13 +60,18 @@ def registration(request):
 
 
 def login(request):
-    result = User.manager.userLogin(request.POST)
-    # result will be either (True, user) or (False, errors)
-    if result[0]:
-        return redirect("Pybelt_app/dashboard.html")
-    for message in result[1].itervalues():
-        messages.error(request, message)
-    return redirect('/')
+    	if request.method != 'POST':
+		return redirect('/')
+
+	user = User.objects.filter(email=request.POST.get('email')).first()
+
+	if user and bcrypt.checkpw(request.POST.get('password').encode(), user.password.encode()):
+		request.session['user_id'] = user.id
+		return redirect('/dashboard')
+	else:
+		messages.add_message(request, messages.INFO, 'Invalid', extra_tags="login")
+		return redirect('/')
+	return redirect('/dashboard')
 
 def logout(request):
     		request.session.clear()
@@ -80,4 +80,129 @@ def logout(request):
 def current_user(request):
     	return User.objects.get(id=request.session['user_id'])
     
+def wishes(request):
+    	user = current_user(request)
+
+	context = {
+		'user': user,
+		'wish_wishes': wish.objects.exclude(favorites=user),
+		'favorites': user.favorites.all()
+	}
+
+	return render(request, 'dashboard.html', context)
+
+def addWish(request, id):
+    
+	user = current_user(request)
+	favorite = Wish.objects.get(id=id)
+
+	user.items.add(favorite)
+
+	return redirect("/dashboard")
+
+def remove_wish(request, id):
+
+	user = current_user(request)
+	favorite = Wish.objects.get(id=id)
+
+	user.items.remove(favorite)
+
+	return redirect('/dashboard')
+
+def show_user(request, id):
+    
+	user = User.objects.get(id=id)
+	context = {
+		'user': user,
+		'favorites': user.favorites.all()
+	}
+
+	return render(request, 'dashboard.html', context)
+
+def create(request):
+    	if request.method != 'POST':
+		return redirect('/')
+	##adds item to wishes
+	check = Wish.objects.validateWish(request.POST)
+	if request.method != 'POST':
+		return redirect('/dashboard')
+	if check[0] == False:
+		for error in check[1]:
+			messages.add_message(request, messages.INFO, error, extra_tags="addwish")
+			return redirect('/dashboard')
+	if check[0] == True:
+
+		quote = Wish.objects.create(
+                    content=request.POST.get('content'),
+                    poster=current_user(request),
+                    author=request.POST.get('author')
+                )
+
+		return redirect('/dashboard')
+	return redirect('/dashboard')
+
+def show_user(request, id):
+    
+	user = User.objects.get(id=id)
+	context = {
+		'user': user,
+		'favorites': user.favorites.all()
+	}
+
+	return render(request, 'PyBelt_app/user.html', context)
+
+def addItem(request):
+    
+	if 'user_id' in request.session:
+		user = currentUser(request)
+
+		context = {
+		"user": user,
+		}
+
+	return render(request, 'PyBelt_app/addItem.html', context)
+
+def submitItem(request):
+    if request.method == 'POST':
+		errors = Wish.objects.validateWish(request.POST)
+		if not errors:
+			# user = currentUser(request)
+			user = User.objects.get (id =request.session['user_id'] )
+			print user, "here"
+			wish = Wish.objects.create(item=request.POST['item'], user=user)
+
+			user.items.add(wish)
+
+			return redirect("/dashboard")
+
+		for error in errors:
+			messages.error(request, error)
+
+	
+
+		return redirect('/dashboard')
+
+def item(request, id):
+	if 'user_id' in request.session:
+		user = currentUser(request)
+		
+
+		context = {
+		'user': user,
+		'wish': Wish.objects.get(id=id)		
+		}
+
+	return render(request, 'PyBelt_app/item.html', context)
+
+def delete(request, id):
+    	wish = Wish.objects.get(id=id)
+	wish.delete()
+
+	return redirect('/dashboard')
+
+def currentUser(request):
+    print request.session['user_id']
+	# user = User.objects.get(id=request.session['user_id'])
+	# return user
+
 
