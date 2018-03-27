@@ -6,15 +6,10 @@ import bcrypt
 
 # Create your views here.
 
-
 def current_user(request):
 	return User.objects.get(id=request.session['user_id'])
-
-
 def index(request):
 	return render(request, 'quotes_app/index.html')
-
-
 def register(request):
 	check = User.objects.validateUser(request.POST)
 	if request.method != 'POST':
@@ -42,8 +37,6 @@ def register(request):
 		request.session['user_id'] = user.id
 		#route to quotes page
 		return redirect('/quotes')
-
-
 def login(request):
 	if request.method != 'POST':
 		return redirect('/')
@@ -57,13 +50,9 @@ def login(request):
 		messages.add_message(request, messages.INFO, 'Invalid', extra_tags="login")
 		return redirect('/')
 	return redirect('/quotes')
-
-
 def logout(request):
 		request.session.clear()
 		return redirect('/')
-
-
 def quotes(request):
 	user = current_user(request)
 
@@ -74,8 +63,6 @@ def quotes(request):
 	}
 
 	return render(request, 'quotes_app/quotes.html', context)
-
-
 def create(request):
 	if request.method != 'POST':
 		return redirect('/')
@@ -97,8 +84,6 @@ def create(request):
 
 		return redirect('/quotes')
 	return redirect('/quotes')
-
-
 def add_favorite(request, id):
 
 	user = current_user(request)
@@ -107,18 +92,13 @@ def add_favorite(request, id):
 	user.favorites.add(favorite)
 
 	return redirect('/quotes')
-
-
 def remove_favorite(request, id):
-
 	user = current_user(request)
 	favorite = Quote.objects.get(id=id)
 
 	user.favorites.remove(favorite)
 
 	return redirect('/quotes')
-
-
 def show_user(request, id):
 
 	user = User.objects.get(id=id)

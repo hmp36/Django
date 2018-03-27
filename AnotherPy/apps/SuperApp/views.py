@@ -44,7 +44,6 @@ def register(request):
             messages.add_message(request, messages.ERROR, error_message)
         return redirect("/")
 
-
 def dashboard(request):
    
     

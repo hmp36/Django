@@ -23,4 +23,4 @@ class Friend(models.Model):
     friend = models.ForeignKey(User, related_name="receiver2")
     created_at = models.DateTimeField(auto_now_add=True)
     objects = FriendManager()
-# Create your models here.
+
